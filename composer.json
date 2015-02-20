@@ -1,0 +1,25 @@
+{
+	"name" : "sansis/messagingbundle",
+	"description" : "SanSIS Messaging Bundle for SanSIS Base Bundle development",
+	"type" : "symfony-bundle",
+	"authors" : [{
+			"name" : "Pablo Santiago Sanchez",
+			"email" : "phackwer@gmail.com"
+		}
+	],
+	"keywords" : [
+		"sansis messaging base bundle symfony development"
+	],
+	"license" : "BSD",
+	"autoload" : {
+		"psr-0" : {
+			"SanSIS\\Core\\MessagingBundle" : ""
+		}
+	},
+	"target-dir" : "SanSIS/Core/MessagingBundle",
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "1.0-dev"
+		}
+	}
+}
