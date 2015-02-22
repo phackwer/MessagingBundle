@@ -2,21 +2,9 @@
 
 namespace SanSIS\Core\MessagingBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use \SanSIS\Core\BaseBundle\Controller\BaseController;
 
-/**
- * @Route("/messaging/")
- */
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
-    /**
-     * @Route("/hello/{name}")
-     * @Template()
-     */
-    public function indexAction($name)
-    {
-        return array('name' => $name);
-    }
+    protected $indexView = 'SanSISCoreMessagingBundle:Default:index.html.twig';
 }

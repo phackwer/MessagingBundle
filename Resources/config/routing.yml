@@ -1,0 +1,3 @@
+sansis_core_messaging_index:
+    pattern:  /
+    defaults: { _controller: SanSISCoreMessagingBundle:Default:index }
