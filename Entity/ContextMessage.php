@@ -25,13 +25,6 @@ class ContextMessage extends AbstractBase
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=256, nullable=false)
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="message", type="text", nullable=false)
      */
     private $message;
@@ -39,7 +32,14 @@ class ContextMessage extends AbstractBase
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_start", type="datetime", nullable=false)
+     * @ORM\Column(name="date_created", type="datetime", nullable=true)
+     */
+    private $dateCreated;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_start", type="datetime", nullable=true)
      */
     private $dateStart;
 
@@ -51,16 +51,9 @@ class ContextMessage extends AbstractBase
     private $dateEnd;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_created", type="datetime", nullable=false)
-     */
-    private $dateCreated;
-
-    /**
      * @var integer
      *
-     * @ORM\Column(name="objectId", type="integer", nullable=true)
+     * @ORM\Column(name="object_id", type="integer", nullable=true)
      */
     private $objectId;
 
@@ -70,6 +63,34 @@ class ContextMessage extends AbstractBase
      * @ORM\ManyToOne(targetEntity="Context")
      */
     private $context;
+
+    /**
+     * @var \SanSIS\Core\BaseBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="\SanSIS\Core\BaseBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+     * })
+     */
+    private $sender;
+
+    /**
+     *
+     * @var \SanSIS\Core\BaseBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="\SanSIS\Core\BaseBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="receiver_id", referencedColumnName="id")
+     * })
+     */
+    private $receiver;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="read", type="boolean", nullable=false)
+     */
+    private $read;
 
     /**
      * Get id
@@ -214,5 +235,49 @@ class ContextMessage extends AbstractBase
         return $this;
     }
 
+    /**
+     * Set sender
+     *
+     * @param \SanSIS\Core\BaseBundle\Entity\User $user
+     * @return ContextMessage
+     */
+    public function setSender(\SanSIS\Core\BaseBundle\Entity\User $user = null)
+    {
+        $this->sender = $user;
 
+        return $this;
+    }
+
+    /**
+     * Get sender
+     *
+     * @return \SanSIS\Core\BaseBundle\Entity\User
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
+    /**
+     * Set receiver
+     *
+     * @param \SanSIS\Core\BaseBundle\Entity\User $user
+     * @return ContextMessage
+     */
+    public function setReceiver(\SanSIS\Core\BaseBundle\Entity\User $user = null)
+    {
+        $this->receiver = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get receiver
+     *
+     * @return \SanSIS\Core\BaseBundle\Entity\User
+     */
+    public function getReceiver()
+    {
+        return $this->receiver;
+    }
 }

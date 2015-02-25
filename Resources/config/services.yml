@@ -5,3 +5,6 @@ services:
     messaging.service:
         class: %messaging.class%
         arguments: ["@doctrine.orm.entity_manager", "default"]
+        calls:
+            - [setSecContext, ['@security.context']]
+            - [setSecFactory, ['@security.encoder_factory']]

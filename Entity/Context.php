@@ -30,13 +30,6 @@ class Context extends AbstractBase
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="search_route", type="string", length=256, nullable=false)
-     */
-    private $searchRoute;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="status", type="integer", nullable=false, options={"default" = 1})
@@ -76,25 +69,6 @@ class Context extends AbstractBase
     public function setName($name)
     {
         $this->name = $name;
-        return $this;
-    }
-
-    /**
-     *
-     * @return the string
-     */
-    public function getSearchRoute()
-    {
-        return $this->searchRoute;
-    }
-
-    /**
-     *
-     * @param string $searchRoute
-     */
-    public function setSearchRoute($searchRoute)
-    {
-        $this->searchRoute = $searchRoute;
         return $this;
     }
 

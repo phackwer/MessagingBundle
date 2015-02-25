@@ -19,8 +19,7 @@ class MessagingController extends BaseController
 
     public function hasMessagesCheckAction()
     {
-        $params = array();
-        $params['chk'] = $this->getService()->hasMessagesCheck();
+        $params = $this->getService()->hasMessagesCheck();
         return $this->renderJson($params);
     }
 }
