@@ -1,0 +1,7 @@
+parameters:
+  messaging.class:                          SanSIS\Core\MessagingBundle\Service\MessagingService
+
+services:
+    messaging.service:
+        class: %messaging.class%
+        arguments: ["@doctrine.orm.entity_manager", "default"]

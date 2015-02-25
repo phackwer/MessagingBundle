@@ -1,0 +1,9 @@
+    {% for msg in msgs %}
+        <div id="flashes-context-messages">
+        {% for flash in flashes %}
+                <div class="alert alert-info">
+                    {{ msg | replace({"\n":'<br />'}) | raw }}
+                </div>
+        {% endfor %}
+        </div>
+    {% endfor %}

@@ -1,3 +1,7 @@
 sansis_core_messaging_index:
     pattern:  /
     defaults: { _controller: SanSISCoreMessagingBundle:Default:index }
+
+sansis_has_messages_check:
+    pattern:  /has_messages_check
+    defaults: { _controller: SanSISCoreMessagingBundle:Messaging:hasMessagesCheck }

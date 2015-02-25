@@ -1,0 +1,19 @@
+<script>
+    function sanSISMessagesCheck(){
+        $.ajax({
+                type:'GET',
+                url: '{{ path('sansis_has_messages_check') }}'
+        }).done(function(data){
+            if (data.chk == true) {
+                $('#sansis_mesasage_checker').css({'color' : '#FF0000'});
+            } else {
+                $('#sansis_mesasage_checker').css({'color' : '#FFFFFF'});
+            }
+            window.setTimeout(sanSISMessagesCheck, 1000);
+        });
+    }
+
+    $(document).ready(function(){
+        // sanSISMessagesCheck()
+    });
+</script>
