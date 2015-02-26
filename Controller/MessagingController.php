@@ -8,7 +8,7 @@ class MessagingController extends BaseController
 {
     protected $service = 'messaging.service';
 
-    protected $indexView = 'SanSISCoreMessagingBundle:Default:index.html.twig';
+    protected $indexView = 'SanSISCoreMessagingBundle:Messaging:index.html.twig';
 
     public function showContextMessagesAction()
     {
@@ -20,6 +20,36 @@ class MessagingController extends BaseController
     public function hasMessagesCheckAction()
     {
         $params = $this->getService()->hasMessagesCheck();
+        return $this->renderJson($params);
+    }
+
+    public function getContextListMessagesCountAction()
+    {
+        $params = $this->getService()->getContextListMessagesCount();
+        return $this->renderJson($params);
+    }
+
+    public function getContextMessageGroupsAction()
+    {
+        $params = $this->getService()->getContextMessageGroups();
+        return $this->renderJson($params);
+    }
+
+    public function getContextMessagesByGroupAction()
+    {
+        $params = $this->getService()->getContextMessagesByGroup();
+        return $this->renderJson($params);
+    }
+
+    public function postContextMessageToGroupAction()
+    {
+        $params = $this->getService()->postContextMessageToGroup();
+        return $this->renderJson($params);
+    }
+
+    public function postContextMessageToUserAction()
+    {
+        $params = $this->getService()->postContextMessageToUserAction();
         return $this->renderJson($params);
     }
 }

@@ -1,7 +1,33 @@
 sansis_core_messaging_index:
     pattern:  /
-    defaults: { _controller: SanSISCoreMessagingBundle:Default:index }
+    defaults: { _controller: SanSISCoreMessagingBundle:Messaging:index }
 
+# pull da morte - checa quantidade de msgs não lidas no server side - às vezes pesa bastante...
 sansis_has_messages_check:
     pattern:  /has_messages_check
     defaults: { _controller: SanSISCoreMessagingBundle:Messaging:hasMessagesCheck }
+
+# JSON para carregar a combo com a quantidade de mensagens não lidas por item.
+sansis_get_context_list_messages_count:
+    pattern:  /get_context_list_messages_count
+    defaults: { _controller: SanSISCoreMessagingBundle:Messaging:getContextListMessagesCount }
+
+# Carrega lista de grupos de mensagens do contexto selecionado, por exemplo Contratos. Por grupo, entende-se um chat com uma pessoa, por exemplo
+sansis_get_context_message_groups:
+    pattern:  /get_context_message_groups
+    defaults: { _controller: SanSISCoreMessagingBundle:Messaging:getContextMessageGroups }
+
+# Carrega as mensagens de um grupo de mensagens específico, por exemplo, msgs para o grupo do Contrato nº 1
+sansis_get_context_messages_by_group:
+    pattern:  /get_context_messages_by_group
+    defaults: { _controller: SanSISCoreMessagingBundle:Messaging:getContextMessagesByGroup }
+
+# Registra as mensagens para um determinado grupo de pessoas envolvidas em um contexto dado.
+sansis_post_context_message_to_group:
+    pattern:  /post_context_message_to_group
+    defaults: { _controller: SanSISCoreMessagingBundle:Messaging:postContextMessageToGroup }
+
+# Registra as mensagens para uma pessoa específica
+sansis_post_context_message_to_user:
+    pattern:  /post_context_message_to_user
+    defaults: { _controller: SanSISCoreMessagingBundle:Messaging:postContextMessageToUser }
