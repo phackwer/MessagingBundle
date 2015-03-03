@@ -6,18 +6,18 @@
     <div class="span11">
         <div class="span3" style="margin-right: 20px">
             <div class="row span">
-                <select class="span3">
-                    <option>[-- Carregando, aguarde --]</option>
+                <select class="span3" name="context" id="context">
+                    <option value="">Carregando, aguarde...</option>
                 </select>
             </div>
-            <div class="span3" style="border: 1px solid #BBBBBB; background: #FFFFFF; height: 350px; overflow: auto; overflow-x: hidden; overflow-y: auto">
+            <div id="messageGroups" class="span3" style="border: 1px solid #BBBBBB; background: #FFFFFF; height: 350px; overflow: auto; overflow-x: hidden; overflow-y: auto">
             </div>
         </div>
         <div class="span7">
-            <div class="row span7" style="border: 1px solid #BBBBBB; background: #FFFFFF; height: 280px; overflow: auto; overflow-x: hidden; overflow-y: auto">
-                Mensagens
+            <div class="row span7" style="margin-left: 0px;border: 1px solid #BBBBBB; background: #FFFFFF; height: 280px; overflow: auto; overflow-x: hidden; overflow-y: auto">
+                Mensagens	
             </div>
-            <textarea class="row span7" style="height:25px;min-height: 25px; margin-left: 22px"></textarea>
+            <textarea class="row span7" style="height:25px;min-height: 25px;"></textarea>
             <button class="btn btn-primary" style><i class="icon-play icon-white"></i>&nbsp;&nbsp; Enviar</button>
             <button class="btn btn-danger" style><i class="icon-trash icon-white"></i>&nbsp;&nbsp; Limpar</button>
         </div>
@@ -27,22 +27,48 @@
 {% block box_javascripts %}
 
 <script>
+
     function getContextListMessagesCount(){
         $.ajax({
                 type:'GET',
                 url: '{{ path('sansis_get_context_list_messages_count') }}'
         }).done(function(data){
-            if (data.chk == true) {
-                $('#sansis_mesasage_checker').css({'color' : '#FF0000'}).html('(' + data.total + ') Mensagens');
-            } else {
-                $('#sansis_mesasage_checker').css({'color' : '#FFFFFF'}).html('(' + data.total + ') Mensagens');
-            }
-            window.setTimeout(sanSISMessagesCheck, 5000);
+            var val = $("#context").val();
+            $("#context").html('');
+            $("#context").append('<option value="">Selecione abaixo</option>');
+            console.log(data);
+            $.each(data, function(i, item){
+                console.log(item);
+                $("#context").append('<option value="'+item.id+'">'+item.screenName+'</option>');
+            });
+            $("#context").val(val);
+            window.setTimeout(getContextListMessagesCount, 5000);
         });
     }
 
+    function getContextMessageGroups()
+    {
+        var val = $("#context").val();
+        $.ajax({
+                type:'GET',
+                url: '{{ path('sansis_get_context_message_groups') }}?context='+val
+        }).done(function(data){
+            var val = $("#context").val();
+            $("#messageGroups").html('');
+            $.each(data, function(i, item){
+                console.log(item);
+                $("#messageGroups").append('<div>'+item.screenName+'</div>');
+            });
+            $("#messageGroups").val(val);
+            window.setTimeout(getContextMessageGroups, 1000);
+        });
+    }
+
+
+
     $(document).ready(function() {
         getContextListMessagesCount();
+        $("#context").change(getContextMessageGroups);
         $("input").val('');
     });
 

@@ -49,6 +49,7 @@ class MessagingService extends BaseService
         // buscar as mensagens para grupo, de todos os contextos, no qual o usuário faz parte do grupo.
         // ou seja, deve receber de parâmetros de "Contextos ao qual o usuário pertence", com os ids dos
         // contextos nos quais o usuário está envolvido
+        
         $userContextsIds = $this->getUserContextsIds($user);
 
         return $this->resultToArray(
@@ -93,13 +94,24 @@ class MessagingService extends BaseService
      */
     public function getContextListMessagesCount()
     {
-        return $this->resultToArray(
+        $contexts = $this->resultToArray(
             $this->getEntityManager()
                  ->getRepository('\SanSIS\Core\MessagingBundle\Entity\Context')
                  ->findBy(array(
                      'userContext' => 1,
                  ))
         );
+
+        $arr = array();
+
+        foreach ($contexts as $key => $value) {
+            $arr[$key] = array(
+                'id' => $value['id'],
+                'screenName' => $value['screenName'],
+            );
+        }
+
+        return $arr;
     }
 
     /**
@@ -109,7 +121,24 @@ class MessagingService extends BaseService
      */
     public function getContextMessageGroups($contextId)
     {
-        // return $
+        $msgList = array();
+        //Se for do tipo 2, Conversas, a lista deve ser de usuários on-line primeiro, away em segundo, off-line por último
+        if ($contextId == 2) {
+
+        }
+        //Para os outros tipos, ordenar como "Mensagem mais recente primeiro, e depois alfabeticamenteß"
+        else if ($contextId) {
+
+        } else {
+            throw new \Exception("Contexto deve ser definido", 1);
+        }
+
+        return $msgList;
+    }
+
+    public function getUsersList()
+    {
+        //Ordenados como online / offline, seguido de mensagem mais recente primeiro e depois alfabeticamente
     }
 
     /**

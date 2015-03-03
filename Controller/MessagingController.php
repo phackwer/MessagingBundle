@@ -31,7 +31,8 @@ class MessagingController extends BaseController
 
     public function getContextMessageGroupsAction()
     {
-        $params = $this->getService()->getContextMessageGroups();
+        $context = $this->getRequest()->query->get('context');
+        $params = $this->getService()->getContextMessageGroups($context);
         return $this->renderJson($params);
     }
 
